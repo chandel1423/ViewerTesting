@@ -7,7 +7,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script type="text/javascript" src="https://cesium.com/downloads/cesiumjs/releases/1.89/Build/Cesium/Cesium.js"></script>
   <link type="text/css" href="https://cesium.com/downloads/cesiumjs/releases/1.89/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-  <script src="gs://viewertesting-c6b96.appspot.com/rti.v0.56.1.min.js"></script>
+	<link type="text/css" href="webRTIViewer/webViewer/css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="Stylesheet">
+	<link type="text/css" href="webRTIViewer/webViewer/css/webrtiviewer.css" rel="Stylesheet">
+	<script type="text/javascript" src="http://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=yrRMO4pqXQa5G_vo4dEH05aXr8aUq0othJQliWkyxAHNYMjk7qPTNtT-hxB0dXnxXhRQC2tTywJzLOEAn0UQuJOzpiK43cx070o-7Vl89sc" charset="UTF-8"></script><script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="webRTIViewer/webViewer/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="webRTIViewer/webViewer/js/pep.min.js"></script>
+	<script type="text/javascript" src="webRTIViewer/webViewer/spidergl/spidergl.min.js"></script>
+	<script type="text/javascript" src="webRTIViewer/webViewer/spidergl/multires.min.js"></script>
 
 <style> 
   html { 
@@ -109,17 +115,7 @@ const app = initializeApp(firebaseConfig);
 
   <div id="rti">
     <script>
-      var rtiviewer = new RTI.RTIViewer( document.getElementById("viewerContainer") );
-
-      rtiviewer.loadConfig("/data/myWebExport/fullConfig.json",
-        function() {
-          console.log("Success: loaded and applied configuration.");
-          rtiviewer.startRendering();
-        },
-        function(message) {
-          console.log("ERROR: Could not load or set configuration. " + message);
-        }
-      );
+      createRtiViewer("viewerContainer", "webrti", 900, 600); 
     </script>
     <button type="button" class="rti-button" onclick = "zoomin();" data-toggle="tooltip" data-placement="bottom" 
       title="Click to view the model from the top">Zoom In</button>

@@ -31,7 +31,7 @@
     margin-right: 30px;
     width:1200px; height:700px;
   }
-  #viewerCont { 
+  #rti { 
     display: none;
     float: left;
     margin-right: 30px;
@@ -51,7 +51,7 @@
 <body>
 <div id="togglebuttons">
   <button onclick="viewertoggle(cesium)" style="background-color:lightgreen">Cesium Ion</button>
-  <button onclick="viewertoggle(viewerCont)" style="background-color:coral">RTI Viewer</button>
+  <button onclick="viewertoggle(rti)" style="background-color:coral">RTI Viewer</button>
   <button onclick="viewertoggle(dwg)" style="background-color:lightblue">DWG File Viewer</button>
   <button onclick="alert(togglecount)">count</button>
 </div>
@@ -100,9 +100,9 @@
     </script>
   </div>
 
-  <div id="viewerCont">
+  <div id="rti">
     <script>
-      createRtiViewer('viewerCont', "webrti", rtiwidth, 700); 
+      createRtiViewer('rti', "webrti", 1200, 700); 
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="Click to view the model from the top">Zoom In</button>
@@ -122,7 +122,7 @@
     var togglecount = 1;
     var rtiwidth = 1200;
     cesium.style.display = 'block';
-    viewerCont.style.display = 'none';
+    rti.style.display = 'none';
     dwg.style.display = 'none';
     function viewertoggle(x) {
       if (x.style.display == 'none') {
@@ -130,13 +130,13 @@
           togglecount = togglecount + 1;
           if (togglecount == 2) {
           cesium.style.width = '600px';
-          viewerCont.style.width = '600px';
+          rti.style.width = '600px';
           rtiwidth = 600;
           dwg.style.width = '600px';
           }
           if (togglecount == 3) {
           cesium.style.width = '400px';
-          viewerCont.style.width = '400px';
+          rti.style.width = '400px';
           rtiwidth = 400;
           dwg.style.width = '400px';
           }
@@ -144,18 +144,18 @@
           x.style.display = 'none';
           togglecount = togglecount - 1;
           cesium.style.width = '1200px';
-          viewerCont.style.width = '1200px';
+          rti.style.width = '1200px';
           rtiwidth = 1200;
           dwg.style.width = '1200px';
           if (togglecount == 2) {
           cesium.style.width = '600px';
-          viewerCont.style.width = '600px';
+          rti.style.width = '600px';
           rtiwidth = 600;
           dwg.style.width = '600px';
           }
           if (togglecount == 1) {
           cesium.style.width = '1200px';
-          viewerCont.style.width = '1200px';
+          rti.style.width = '1200px';
           rtiwidth = 1200;
           dwg.style.width = '1200px';
           }

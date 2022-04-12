@@ -1,1 +1,0 @@
-webGLRtiMaker.exe pathToFile -q 90

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/"/>
+  <meta charset="utf-8">
+  <title>Multi-viewer Interface</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cesium.com/downloads/cesiumjs/releases/1.89/Build/Cesium/Cesium.js"></script>
+  <link type="text/css" href="https://cesium.com/downloads/cesiumjs/releases/1.89/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <script src="gs://viewertesting-c6b96.appspot.com/rti.v0.56.1.min.js"></script>
+
+<style> 
+  html { 
+    overflow-y: visible; 
+    overflow-x: visible; 
+  }
+  body { 
+    position: absolute; 
+  }
+  #togglebuttons {
+    margin-bottom: 20px;
+  }
+  #cesium {
+    float: left;
+    margin-right: 30px;
+    width:1200px; height:700px;
+  }
+  #rti { 
+    display: none;
+    float: left;
+    margin-right: 30px;
+    width:1200px; height:700px; 
+    border:1px solid; padding:10px;
+  }
+  #dwg { 
+    display: none; 
+    float: left;
+    margin-right: 30px;
+    width:1200px; height:700px; 
+    border:1px solid; padding:10px;
+  }
+</style>
+</head>
+
+<body>
+<script>
+import { initializeApp } from "firebase/app";
+const firebaseConfig = {
+  apiKey: "AIzaSyCmLq_Xl7NUrTLYos8nKKLv3sSQzpEc7uk",
+  authDomain: "viewertesting-c6b96.firebaseapp.com",
+  projectId: "viewertesting-c6b96",
+  storageBucket: "viewertesting-c6b96.appspot.com",
+  messagingSenderId: "391158255683",
+  appId: "1:391158255683:web:10284f9fa77236617e84f6"
+};
+const app = initializeApp(firebaseConfig);
+</script>
+
+<div id="togglebuttons">
+  <button onclick="viewertoggle(cesium)" style="background-color:lightgreen">Cesium Ion</button>
+  <button onclick="viewertoggle(rti)" style="background-color:coral">RTI Viewer</button>
+  <button onclick="viewertoggle(dwg)" style="background-color:lightblue">DWG File Viewer</button>
+  <button onclick="alert(togglecount)">count</button>
+</div>
+
+  <div id="cesium">
+    <script>
+    // Access token for Cesium Ion
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNjQ1NTgwOS1hM2QzLTQ1Y2QtOWE5Zi1jODc1ZTJjNDkxODEiLCJpZCI6NzkyNDQsImlhdCI6MTY0MTkzMTc3NH0.AmCqPPV7p3Oldv_Vk-WrBPm_NwkhpTxgZWZaqWnI-pE';
+    const viewer = new Cesium.Viewer('cesium', {
+        globe: false,
+        animation: false,
+        timeline: false,
+        skyBox: false,
+    });    
+    var scene = viewer.scene;
+    scene.backgroundColor = Cesium.Color.BLACK.clone();
+
+    const tileset = viewer.scene.primitives.add(
+        new Cesium.Cesium3DTileset({
+        url: Cesium.IonResource.fromAssetId(755017),
+      })
+    );
+    tileset.readyPromise.then(function(tileset) {
+    viewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, -0.5, 0));
+    });
+    </script>
+    <div>
+    <button type="button" class="cesium-button" onclick = "topView();" data-toggle="tooltip" data-placement="bottom" 
+      title="Click to view the model from the top">Top View</button>
+    <button type="button" class="cesium-button" onclick = "bottomView();" data-toggle="tooltip" data-placement="bottom" 
+      title="Click to view the model from the bottom">Bottom View</button>
+    <button type="button" class="cesium-button" onclick = "frontView();" data-toggle="tooltip" data-placement="bottom" 
+      title="Click to view the model from the front side">Front View</button>
+    </div>
+    <script>
+      // Make functions that changes the view point in Cesium viewer
+      function topView() {
+          viewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, -Cesium.Math.PI_OVER_TWO, 0));
+      }
+      function bottomView() {
+          viewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, Cesium.Math.PI_OVER_TWO, 0));
+      }
+      function frontView() {
+          viewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, 0, 0));
+      }
+    </script>
+  </div>
+
+  <div id="rti">
+    <script>
+      var rtiviewer = new RTI.RTIViewer( document.getElementById("viewerContainer") );
+
+      rtiviewer.loadConfig("/data/myWebExport/fullConfig.json",
+        function() {
+          console.log("Success: loaded and applied configuration.");
+          rtiviewer.startRendering();
+        },
+        function(message) {
+          console.log("ERROR: Could not load or set configuration. " + message);
+        }
+      );
+    </script>
+    <button type="button" class="rti-button" onclick = "zoomin();" data-toggle="tooltip" data-placement="bottom" 
+      title="Click to view the model from the top">Zoom In</button>
+    <button type="button" class="rti-button" onclick = "zoomout();" data-toggle="tooltip" data-placement="bottom" 
+      title="Click to view the model from the bottom">Zoom Out</button>
+  </div>
+
+  <div id="dwg">
+    DWG Viewer
+    <button type="button" class="rti-button" onclick = "zoomin();" data-toggle="tooltip" data-placement="bottom" 
+      title="Click to view the model from the top">Zoom In</button>
+    <button type="button" class="rti-button" onclick = "zoomout();" data-toggle="tooltip" data-placement="bottom" 
+      title="Click to view the model from the bottom">Zoom Out</button>
+  </div>
+
+  <script>
+    var togglecount = 1;
+    cesium.style.display = 'block';
+    rti.style.display = 'none';
+    dwg.style.display = 'none';
+    function viewertoggle(x) {
+      if (x.style.display == 'none') {
+          x.style.display = 'block';
+          togglecount = togglecount + 1;
+          if (togglecount == 2) {
+          cesium.style.width = '600px';
+          rti.style.width = '600px';
+          dwg.style.width = '600px';
+          }
+          if (togglecount == 3) {
+          cesium.style.width = '400px';
+          rti.style.width = '400px';
+          dwg.style.width = '400px';
+          }
+        } else {
+          x.style.display = 'none';
+          togglecount = togglecount - 1;
+          cesium.style.width = '1200px';
+          rti.style.width = '1200px';
+          dwg.style.width = '1200px';
+          if (togglecount == 2) {
+          cesium.style.width = '600px';
+          rti.style.width = '600px';
+          dwg.style.width = '600px';
+          }
+          if (togglecount == 1) {
+          cesium.style.width = '1200px';
+          rti.style.width = '1200px';
+          dwg.style.width = '1200px';
+          }
+          if (togglecount == 0) {
+            
+          }
+        }
+      }
+  </script>    
+</body>
+</html>

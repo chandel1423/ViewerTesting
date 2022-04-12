@@ -102,8 +102,12 @@
 
   <div id="viewerCont">
     <script>
-      createRtiViewer('viewerCont', "webrti"); 
+      createRtiViewer('viewerCont', "webrti", viewerCont.style.display, 700); 
     </script>
+    <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
+      title="Click to view the model from the top">Zoom In</button>
+    <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
+      title="Click to view the model from the bottom">Zoom Out</button>
   </div>
 
   <div id="dwg">

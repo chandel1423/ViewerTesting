@@ -9,7 +9,8 @@
   <link type="text/css" href="https://cesium.com/downloads/cesiumjs/releases/1.89/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 	<link type="text/css" href="webViewer/css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="Stylesheet">
 	<link type="text/css" href="webViewer/css/webrtiviewer.css" rel="Stylesheet">
-	<script type="text/javascript" src="http://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=yrRMO4pqXQa5G_vo4dEH05aXr8aUq0othJQliWkyxAHNYMjk7qPTNtT-hxB0dXnxXhRQC2tTywJzLOEAn0UQuJOzpiK43cx070o-7Vl89sc" charset="UTF-8"></script><script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="http://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=yrRMO4pqXQa5G_vo4dEH05aXr8aUq0othJQliWkyxAHNYMjk7qPTNtT-hxB0dXnxXhRQC2tTywJzLOEAn0UQuJOzpiK43cx070o-7Vl89sc" charset="UTF-8"></script>
+  <script type="text/javascript" src="webViewer/js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="webViewer/js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="webViewer/js/pep.min.js"></script>
 	<script type="text/javascript" src="webViewer/spidergl/spidergl.min.js"></script>
@@ -100,9 +101,9 @@
     </script>
   </div>
 
-  <div id="rti">
+  <div id="viewerCont">
     <script>
-      createRtiViewer("rti", "webrti", 900, 600); 
+      createRtiViewer('viewerCont', "webrti"); 
     </script>
     <button type="button" class="rti-button" onclick = "zoomin();" data-toggle="tooltip" data-placement="bottom" 
       title="Click to view the model from the top">Zoom In</button>

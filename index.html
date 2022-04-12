@@ -32,7 +32,7 @@
     margin-right: 30px;
     width:1200px; height:700px;
   }
-  #rti { 
+  #viewercont { 
     display: none;
     float: left;
     margin-right: 30px;
@@ -52,7 +52,7 @@
 <body>
 <div id="togglebuttons">
   <button onclick="viewertoggle(cesium)" style="background-color:lightgreen">Cesium Ion</button>
-  <button onclick="viewertoggle(rti)" style="background-color:coral">RTI Viewer</button>
+  <button onclick="viewertoggle(viewercont)" style="background-color:coral">RTI Viewer</button>
   <button onclick="viewertoggle(dwg)" style="background-color:lightblue">DWG File Viewer</button>
   <button onclick="alert(togglecount)">count</button>
 </div>
@@ -122,7 +122,7 @@
   <script>
     var togglecount = 1;
     cesium.style.display = 'block';
-    rti.style.display = 'none';
+    viewercont.style.display = 'none';
     dwg.style.display = 'none';
     function viewertoggle(x) {
       if (x.style.display == 'none') {
@@ -130,28 +130,28 @@
           togglecount = togglecount + 1;
           if (togglecount == 2) {
           cesium.style.width = '600px';
-          rti.style.width = '600px';
+          viewercont.style.width = '600px';
           dwg.style.width = '600px';
           }
           if (togglecount == 3) {
           cesium.style.width = '400px';
-          rti.style.width = '400px';
+          viewercont.style.width = '400px';
           dwg.style.width = '400px';
           }
         } else {
           x.style.display = 'none';
           togglecount = togglecount - 1;
           cesium.style.width = '1200px';
-          rti.style.width = '1200px';
+          viewercont.style.width = '1200px';
           dwg.style.width = '1200px';
           if (togglecount == 2) {
           cesium.style.width = '600px';
-          rti.style.width = '600px';
+          viewercont.style.width = '600px';
           dwg.style.width = '600px';
           }
           if (togglecount == 1) {
           cesium.style.width = '1200px';
-          rti.style.width = '1200px';
+          viewercont.style.width = '1200px';
           dwg.style.width = '1200px';
           }
           if (togglecount == 0) {

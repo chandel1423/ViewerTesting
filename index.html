@@ -111,7 +111,9 @@
     <script>
       // Create web RTI viewer
       // Web RTI Viewer from Visual Computing Lab in ISTI (http://vcg.isti.cnr.it/rti/webviewer.php)
-      createRtiViewer('rtiContainer', "webrti", 600, 600); 
+      w = parseInt(document.getElementById('rtiContainer').clientWidth);
+      h = parseInt(document.getElementById('rtiContainer').clientHeight);
+      createRtiViewer('rtiContainer', "webrti", w, h); 
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>

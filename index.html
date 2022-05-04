@@ -71,22 +71,22 @@
     Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNjQ1NTgwOS1hM2QzLTQ1Y2QtOWE5Zi1jODc1ZTJjNDkxODEiLCJpZCI6NzkyNDQsImlhdCI6MTY0MTkzMTc3NH0.AmCqPPV7p3Oldv_Vk-WrBPm_NwkhpTxgZWZaqWnI-pE';
     // Create Cesium viewer with only the model
     // Cesium JS (https://cesium.com/platform/cesiumjs/)
-    const viewer = new Cesium.Viewer('cesiumContainer', {
+    const cesiumViewer = new Cesium.Viewer('cesiumContainer', {
         globe: false,
         animation: false,
         timeline: false,
         skyBox: false,
     });    
-    var scene = viewer.scene;
+    var scene = cesiumViewer.scene;
     scene.backgroundColor = Cesium.Color.BLACK.clone();
     // Fix the camera to the bounding sphere of the model
-    const tileset = viewer.scene.primitives.add(
+    const tileset = cesiumViewer.scene.primitives.add(
         new Cesium.Cesium3DTileset({
         url: Cesium.IonResource.fromAssetId(755017),
       })
     );
     tileset.readyPromise.then(function(tileset) {
-    viewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, -0.5, 0));
+    cesiumViewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, -0.5, 0));
     });
     </script>
     <div>
@@ -100,13 +100,13 @@
     <script>
       // Make functions that changes the view point in Cesium viewer
       function topView() {
-          viewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, -Cesium.Math.PI_OVER_TWO, 0));
+          cesiumViewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, -Cesium.Math.PI_OVER_TWO, 0));
       }
       function bottomView() {
-          viewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, Cesium.Math.PI_OVER_TWO, 0));
+          cesiumViewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, Cesium.Math.PI_OVER_TWO, 0));
       }
       function frontView() {
-          viewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, 0, 0));
+          cesiumViewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, 0, 0));
       }
     </script>
   </div>
@@ -115,7 +115,7 @@
     <script>
       // Create web RTI viewer
       // Web RTI Viewer from Visual Computing Lab in ISTI (http://vcg.isti.cnr.it/rti/webviewer.php)
-      createRtiViewer('rtiContainer', "webrti", 600, 600); 
+      createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
@@ -127,7 +127,64 @@
     <script>
       // Create .dwg file viewer
       // Autodesk Forge Viewer API ()
-      
+      var dwgViewer;
+        var options = {
+            env: 'AutodeskProduction',
+            accessToken: '<YOUR_APPLICATION_TOKEN>'
+        };
+        var documentId = 'urn:<YOUR_URN_ID>';
+        Autodesk.Viewing.Initializer(options, function onInitialized(){
+            Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
+        });
+        
+        /**
+        * Autodesk.Viewing.Document.load() success callback.
+        * Proceeds with model initialization.
+        */
+        function onDocumentLoadSuccess(doc) {
+            // A document contains references to 3D and 2D viewables.
+            var viewables = Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), {'type':'geometry'}, true);
+            if (viewables.length === 0) {
+                console.error('Document contains no viewables.');
+                return;
+            }
+            // Choose any of the avialble viewables
+            var initialViewable = viewables[0];
+            var svfUrl = doc.getViewablePath(initialViewable);
+            var modelOptions = {
+                sharedPropertyDbPath: doc.getPropertyDbPath()
+            };
+            var viewerDiv = document.getElementById('MyViewerDiv');
+            dwgViewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerDiv);
+            dwgViewer.start(svfUrl, modelOptions, onLoadModelSuccess, onLoadModelError);
+        }
+
+        /**
+         * Autodesk.Viewing.Document.load() failuire callback.
+         */
+        function onDocumentLoadFailure(viewerErrorCode) {
+            console.error('onDocumentLoadFailure() - errorCode:' + viewerErrorCode);
+        }
+
+        /**
+         * viewer.loadModel() success callback.
+         * Invoked after the model's SVF has been initially loaded.
+         * It may trigger before any geometry has been downloaded and displayed on-screen.
+         */
+        function onLoadModelSuccess(model) {
+            console.log('onLoadModelSuccess()!');
+            console.log('Validate model loaded: ' + (viewer.model === model));
+            console.log(model);
+        }
+
+        /**
+         * viewer.loadModel() failure callback.
+         * Invoked when there's an error fetching the SVF file.
+         */
+        function onLoadModelError(viewerErrorCode) {
+            console.error('onLoadModelError() - errorCode:' + viewerErrorCode);
+        }
+
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
@@ -138,7 +195,6 @@
   <script>
     // Script for changing the width for each viewer based on number of viewers turned on
     var togglecount = 1;
-    var rtiwidth = 1200;
     cesiumContainer.style.display = 'block';
     rtiContainer.style.display = 'none';
     dwgContainer.style.display = 'none';
@@ -147,7 +203,6 @@
       cesiumContainer.style.width = changedWidth+'vw';
       rtiContainer.style.width = changedWidth+'vw';
       dwgContainer.style.width = changedWidth+'vw';
-      rtiwidth = 600;      
     }
     // Function for turning each viewer on and off when pressing the corresponding button
     function viewertoggle(x) {

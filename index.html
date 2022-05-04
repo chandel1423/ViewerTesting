@@ -126,7 +126,7 @@
             env: 'AutodeskProduction',
             api: 'streamingV2',
             getAccessToken: function(onTokenReady) {
-              var token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlU3c0dGRldUTzlBekNhSzBqZURRM2dQZXBURVdWN2VhIn0.eyJzY29wZSI6WyJkYXRhOnJlYWQiXSwiY2xpZW50X2lkIjoiVEYyempaZVlTVUc4TElOMHBad0tRTzFUSGJOcTdaZUMiLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbS9hdWQvYWp3dGV4cDYwIiwianRpIjoibW9PWWRxamtoVExiVUYxcXhMU0RhQzF0MDFiZzBiOU1pZVBaSmxvNkFsMXBQelNQNlhSczgzcnU2clN1OUlpUSIsImV4cCI6MTY1MTY0NzcyNn0.PmXrEH7GRDWAhq3NV9YNQTFiNROHFkfK3ekukc-pLo1jQMqbHQAjwOuWv0VV7zeHDscWdzYMqaKdiCJiOUx6gP0FNiMMjq_k1OUBa42SaQXKpBlZOt7oXvWrD-vds9mgzLBgiGk8PsCOTWBTeAXxlbkZKZHBxnMQR2wWQFKNqNbM_1VVlyu1ymu9EzJcEol7cXpMNUHMJSyIEZawveMb8OZZdnrWc1c41G4Ij4b3Bbxkq0wOMsh3y-5qsj7jYklPSqNh46oi5v-QCBhP7HtpgKyuF4jhXdTax5SbJGUnwWsza4-Uop7sCtRg6uTNdJrDDpgiOrHqrOv9NGqDY_r4Ow';
+              var token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlU3c0dGRldUTzlBekNhSzBqZURRM2dQZXBURVdWN2VhIn0.eyJzY29wZSI6WyJkYXRhOnJlYWQiXSwiY2xpZW50X2lkIjoiVEYyempaZVlTVUc4TElOMHBad0tRTzFUSGJOcTdaZUMiLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbS9hdWQvYWp3dGV4cDYwIiwianRpIjoieDlnOGFGemNKT3Y2a3NERXdZb3psdjBaeXdjUG9nQWt6TjkxTVFHbHN1R1JFanRaSVNkSU4wOEhmM1NnSHpvRyIsImV4cCI6MTY1MTY1MzY1NH0.aZZS6nFKgDFOVpz4EgPt5UA4NH7bdKYOOeRa-IxHIimSFRcymr2jBys9Am6XPUWJI5kBjcnkEKfTyv5h4KR7YZwzTM72aY4IDRpjOW1U22Ee0sU13IR1Lhirlmr1L8IEyuwvqW7qWtHW1-98JYaU3BOliC8TiQ326cV_KVh8rAA7UodqMXCFfkFno_kpLyvbbLSRznNpIHp0YxPSTRkgPOTkqzKlUr4esBzwxoFbNkTwLq-f-3WTUMaNanv0786O4fTchJXZ5Z8vHBKB_ovPegVN8zSVWunMu9djEiPTiv0JksPU6mPas35zWHdTxSgmOf-JfIQpOG3vm-XGHztxPA';
               var timeInSeconds = 3600;
               onTokenReady(token, timeInSeconds);
             }
@@ -160,6 +160,7 @@
       changedWidth = (90-3*togglecount)/togglecount;
       cesiumContainer.style.width = changedWidth+'vw';
       rtiContainer.style.width = changedWidth+'vw';
+      canvasDiv.style.width = document.getElementById('rtiContainer').clientWidth;
       dwgContainer.style.width = changedWidth+'vw';
     }
     // Function for turning each viewer on and off when pressing the corresponding button

@@ -58,7 +58,7 @@
 
   <div id="blankAlert">
     <!--Something to show when there is no viewer turned on-->
-    Please choose a viewer to start from. (0.1)
+    Please choose a viewer to start from. (0.11)
   </div>
 
   <div id="cesiumContainer">
@@ -158,11 +158,15 @@
     cesiumContainer.style.display = 'block';
     rtiContainer.style.display = 'none';
     dwgContainer.style.display = 'none';
+    function setWidth(width) {
+      var canvas = document.getElementById("rtiContainer_webgl");  
+      canvas.width = width;
+    }
     function changewidth() {
       changedWidth = (90-3*(togglecount-1))/togglecount;
       cesiumContainer.style.width = changedWidth+'vw';
       rtiContainer.style.width = changedWidth+'vw';
-      document.getElementById('rtiContainer_webgl').clientWidth = changedWidth;
+      setWidth(changedWidth);
       dwgContainer.style.width = changedWidth+'vw';
     }
     // Function for turning each viewer on and off when pressing the corresponding button

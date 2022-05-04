@@ -36,13 +36,11 @@
     width:90vw; height:80vh;
   }
   #rtiContainer { 
-    display: none;
     float: left;
     margin-right: 3vw;
     width:90vw; height:80vh;
   }
   #dwgContainer { 
-    display: none; 
     float: left;
     margin-right: 3vw;
     width:90vw; height:80vh;
@@ -111,12 +109,7 @@
     <script>
       // Create web RTI viewer
       // Web RTI Viewer from Visual Computing Lab in ISTI (http://vcg.isti.cnr.it/rti/webviewer.php)
-      function showRTI() {
-        w = parseInt(document.getElementById('rtiContainer').clientWidth);
-        h = parseInt(document.getElementById('rtiContainer').clientHeight);
-        createRtiViewer('rtiContainer', "webrti", w, h); 
-      }
-      showRTI();
+      createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>

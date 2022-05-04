@@ -159,7 +159,7 @@
     rtiContainer.style.display = 'none';
     dwgContainer.style.display = 'none';
     function changewidth() {
-      changedWidth = (90-3*togglecount)/togglecount;
+      changedWidth = (90-3*(togglecount-1))/togglecount;
       cesiumContainer.style.width = changedWidth+'vw';
       rtiContainer.style.width = changedWidth+'vw';
       document.getElementById('rtiContainer_webgl').clientWidth = changedWidth;

@@ -52,15 +52,15 @@
 </head>
 
 <body>
-<div id="togglebuttons">
-  <button onclick="viewertoggle(cesiumContainer)" style="background-color:lightgreen">Cesium Ion</button>
-  <button onclick="viewertoggle(rtiContainer)" style="background-color:coral">RTI Viewer</button>
-  <button onclick="viewertoggle(dwgContainer)" style="background-color:lightblue">DWG File Viewer</button>
-</div>
+  <div id="togglebuttons">
+    <button onclick="viewertoggle(cesiumContainer)" style="background-color:lightgreen">Cesium Ion</button>
+    <button onclick="viewertoggle(rtiContainer)" style="background-color:coral">RTI Viewer</button>
+    <button onclick="viewertoggle(dwgContainer)" style="background-color:lightblue">DWG File Viewer</button>
+  </div>
 
-<div id="blankAlert">
-  Please choose a viewer to start from.
-</div>
+  <div id="blankAlert">
+    Please choose a viewer to start from.
+  </div>
 
   <div id="cesiumContainer">
     <script>
@@ -108,23 +108,24 @@
 
   <div id="rtiContainer">
     <script>
-      createRtiViewer('rtiContainer', "webrti"); 
+      createRtiViewer('rtiContainer', "webrti". document.getElementById('rtiContainer').clientWeight, document.getElementById('rtiContainer').clientHeight); 
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
-      title="Click to view the model from the top">Zoom In</button>
+      title="sample button 1">button 1</button>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
-      title="Click to view the model from the bottom">Zoom Out</button>
+      title="sample button 2">button 2</button>
   </div>
 
   <div id="dwgContainer">
     DWG Viewer
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
-      title="Click to view the model from the top">Zoom In</button>
+      title="sample button 1">button 1</button>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
-      title="Click to view the model from the bottom">Zoom Out</button>
+      title="sample button 2">button 2</button>
   </div>
 
   <script>
+    // Script for changing the width for each viewer based on number of viewers turned on
     var togglecount = 1;
     var rtiwidth = 1200;
     cesiumContainer.style.display = 'block';
@@ -137,6 +138,7 @@
       dwgContainer.style.width = changedWidth+'vw';
       rtiwidth = 600;      
     }
+    // Function for turning each viewer on and off when pressing the corresponding button
     function viewertoggle(x) {
       if (x.style.display == 'none') {
         x.style.display = 'block';
@@ -147,9 +149,11 @@
         togglecount = togglecount - 1;
       }
       if (togglecount == 0) {
+        // Displays the alert message when there is no viewer turned on
         blankAlert.style.display = 'block';
       }
       else {
+        // Hides the alert message and changes the width of each viewer
         blankAlert.style.display = 'none';
         changewidth();
       }

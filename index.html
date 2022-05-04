@@ -58,7 +58,7 @@
 
   <div id="blankAlert">
     <!--Something to show when there is no viewer turned on-->
-    Please choose a viewer to start from. (0.11)
+    Please choose a viewer to start from. (0.12)
   </div>
 
   <div id="cesiumContainer">
@@ -111,7 +111,10 @@
     <script>
       // Create web RTI viewer
       // Web RTI Viewer from Visual Computing Lab in ISTI (http://vcg.isti.cnr.it/rti/webviewer.php)
-      createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
+      function showRTI() {
+        createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
+      }
+      showRTI();
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
@@ -144,6 +147,8 @@
         }
 
         console.log('Initialization complete, loading a model next...');
+      
+      document.  
       });
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
@@ -158,15 +163,18 @@
     cesiumContainer.style.display = 'block';
     rtiContainer.style.display = 'none';
     dwgContainer.style.display = 'none';
-    function setWidth(width) {
-      var canvas = document.getElementById("rtiContainer_webgl");  
-      canvas.width = width;
-    }
+//    function setWidth(width) {
+//      var canvas = document.getElementById("rtiContainer_webgl");  
+//      canvas.width = width;
+//    }
     function changewidth() {
       changedWidth = (90-3*(togglecount-1))/togglecount;
       cesiumContainer.style.width = changedWidth+'vw';
       rtiContainer.style.width = changedWidth+'vw';
-      setWidth(changedWidth);
+      var canvas = document.getElementById("rtiContainer_webgl");  
+      const context = canvas.getContext('2d');
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      showRTI();
       dwgContainer.style.width = changedWidth+'vw';
     }
     // Function for turning each viewer on and off when pressing the corresponding button

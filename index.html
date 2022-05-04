@@ -14,10 +14,8 @@
   <script type="text/javascript" src="spidergl/spidergl.min.js"></script>
   <script type="text/javascript" src="spidergl/multires.min.js"></script>
   <script type="text/javascript" src="main.js"></script>
-  <link type="text/css" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/2.*/style.min.css" rel="stylesheet">
-  <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/2.*/three.min.js"></script>
-  <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/2.*/viewer3D.min.js"></script>
-
+  <link type="text/css" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" rel="stylesheet">
+  <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js"></script>
 <style> 
   html { 
     overflow-y: visible; 
@@ -114,7 +112,7 @@
     <script>
       // Create web RTI viewer
       // Web RTI Viewer from Visual Computing Lab in ISTI (http://vcg.isti.cnr.it/rti/webviewer.php)
-      createRtiViewer('rtiContainer', "webrti", number(document.getElementById('rtiContainer').clientWidth), number(document.getElementById('rtiContainer').clientHeight)); 
+      createRtiViewer('rtiContainer', "webrti", parseInt(document.getElementById('rtiContainer').clientWidth), parseInt(document.getElementById('rtiContainer').clientHeight)); 
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
@@ -125,7 +123,7 @@
   <div id="dwgContainer">
     <script>
       // Create .dwg file viewer
-      // Autodesk Forge Viewer API ()
+      // Autodesk Forge Viewer Library (https://forge.autodesk.com/en/docs/viewer/v7/developers_guide/overview/)
       var dwgViewer;
         var options = {
             env: 'AutodeskProduction',

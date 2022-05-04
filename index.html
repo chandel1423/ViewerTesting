@@ -50,12 +50,14 @@
 
 <body>
   <div id="togglebuttons">
+    <!--Buttons to toggle viewers on and off-->
     <button onclick="viewertoggle(cesiumContainer)" style="background-color:lightgreen">Cesium Ion</button>
     <button onclick="viewertoggle(rtiContainer)" style="background-color:coral">RTI Viewer</button>
     <button onclick="viewertoggle(dwgContainer)" style="background-color:lightblue">DWG File Viewer</button>
   </div>
 
   <div id="blankAlert">
+    <!--Something to show when there is no viewer turned on-->
     Please choose a viewer to start from.
   </div>
 
@@ -126,7 +128,7 @@
             env: 'AutodeskProduction',
             api: 'streamingV2',
             getAccessToken: function(onTokenReady) {
-              var token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlU3c0dGRldUTzlBekNhSzBqZURRM2dQZXBURVdWN2VhIn0.eyJzY29wZSI6WyJkYXRhOnJlYWQiXSwiY2xpZW50X2lkIjoiVEYyempaZVlTVUc4TElOMHBad0tRTzFUSGJOcTdaZUMiLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbS9hdWQvYWp3dGV4cDYwIiwianRpIjoieDlnOGFGemNKT3Y2a3NERXdZb3psdjBaeXdjUG9nQWt6TjkxTVFHbHN1R1JFanRaSVNkSU4wOEhmM1NnSHpvRyIsImV4cCI6MTY1MTY1MzY1NH0.aZZS6nFKgDFOVpz4EgPt5UA4NH7bdKYOOeRa-IxHIimSFRcymr2jBys9Am6XPUWJI5kBjcnkEKfTyv5h4KR7YZwzTM72aY4IDRpjOW1U22Ee0sU13IR1Lhirlmr1L8IEyuwvqW7qWtHW1-98JYaU3BOliC8TiQ326cV_KVh8rAA7UodqMXCFfkFno_kpLyvbbLSRznNpIHp0YxPSTRkgPOTkqzKlUr4esBzwxoFbNkTwLq-f-3WTUMaNanv0786O4fTchJXZ5Z8vHBKB_ovPegVN8zSVWunMu9djEiPTiv0JksPU6mPas35zWHdTxSgmOf-JfIQpOG3vm-XGHztxPA';
+              var token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlU3c0dGRldUTzlBekNhSzBqZURRM2dQZXBURVdWN2VhIn0.eyJzY29wZSI6WyJkYXRhOnJlYWQiXSwiY2xpZW50X2lkIjoiVEYyempaZVlTVUc4TElOMHBad0tRTzFUSGJOcTdaZUMiLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbS9hdWQvYWp3dGV4cDYwIiwianRpIjoiZE5OYWI1NmlYMGNGam9GZHBPSmpsWXJPVVhGZGx3aDJWTE9hbVdJcGUxQUtRSXdQSm9naHNPU3A4bFpiUkQ0OSIsImV4cCI6MTY1MTY1NDIyM30.e0HND5TN1Rk8CZZYaew2SRDxbyqsSrvpURwfjKDTnoSC81KZbhZbSbgr2QaKOkMvtFMtvJUFa3ZsJdSP8fTKTVI21HbB7cv1rcRRxE1GunSQA9KkP4kprxc7Zs6lP053EtPETuWtYPb7AZootqiCWcfR2j5pnjsv48EPb0UTE_zWKdNCJdCOanI__zndjpgfcCT2kVrq1AAU5sFgW32nYxdjBq_1iT03AZKYsQlZYnVcAjwIGKHRjuwxCmK1ITuaFB5q0sJ_CyKp1LJtajIHl7vZ0u0-rxtLta-TKVI8rQXRnXLbwBhMYwZWPc88s-_oz50sLRdvKhJJdTZ6kL0pCA';
               var timeInSeconds = 3600;
               onTokenReady(token, timeInSeconds);
             }
@@ -160,7 +162,7 @@
       changedWidth = (90-3*togglecount)/togglecount;
       cesiumContainer.style.width = changedWidth+'vw';
       rtiContainer.style.width = changedWidth+'vw';
-      canvasDiv.style.width = document.getElementById('rtiContainer').clientWidth;
+      createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
       dwgContainer.style.width = changedWidth+'vw';
     }
     // Function for turning each viewer on and off when pressing the corresponding button

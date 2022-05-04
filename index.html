@@ -114,7 +114,6 @@
       function showRTI() {
         createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
       }
-      showRTI();
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
@@ -145,7 +144,6 @@
           console.error('falied to create a viewer: WebGL not supported');
           return;
         }
-
         console.log('Initialization complete, loading a model next...');
       document.getElementById('adsk-viewing-viewer notouch dark-theme quality-text').style.width = document.getElementById('dwgContainer').style.width;  
       document.getElementById('adsk-viewing-viewer notouch dark-theme quality-text').style.height = document.getElementById('dwgContainer').style.height;  
@@ -163,15 +161,11 @@
     cesiumContainer.style.display = 'block';
     rtiContainer.style.display = 'none';
     dwgContainer.style.display = 'none';
-    function setWidth(w) {
-      var canvas = document.getElementById("rtiContainer_webgl");  
-      canvas.width = w;
-    }
     function changewidth() {
       changedWidth = (90-3*(togglecount-1))/togglecount;
       cesiumContainer.style.width = changedWidth+'vw';
       rtiContainer.style.width = changedWidth+'vw';
-      setWidth(rtiContainer.style.width);
+      showRTI();
       dwgContainer.style.width = changedWidth+'vw';
     }
     // Function for turning each viewer on and off when pressing the corresponding button

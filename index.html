@@ -162,7 +162,7 @@
       changedWidth = (90-3*togglecount)/togglecount;
       cesiumContainer.style.width = changedWidth+'vw';
       rtiContainer.style.width = changedWidth+'vw';
-      createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
+      document.getElementById('rtiContainer_webgl').clientWidth = changedWidth;
       dwgContainer.style.width = changedWidth+'vw';
     }
     // Function for turning each viewer on and off when pressing the corresponding button

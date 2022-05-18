@@ -42,7 +42,7 @@
     width:90vw; height:80vh;
   }
   #rtiContainer { 
-    display: none;
+    display: block;
     float: left;
     margin-right: 3vw;
     width:90vw; height:80vh;
@@ -118,7 +118,7 @@
   </div>
 
   <div>
-    (0.191)
+    (0.192)
   </div>
 
 <div id="containerA">
@@ -190,7 +190,8 @@
     <script>
       // Create web RTI viewer
       // Web RTI Viewer from Visual Computing Lab in ISTI (http://vcg.isti.cnr.it/rti/webviewer.php)
-      function showRTI() {
+      createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
+      function refreshRTI() {
         document.getElementById('rtiContainer_webgl');
         createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
       }
@@ -243,7 +244,7 @@
       changedWidthB = (90-3*(toggleBcount-1))/toggleBcount;
       rtiContainer.style.width = changedWidthB+'vw';
       imageContainer.style.width = changedWidthB+'vw';
-      showRTI();      
+      refreshRTI();      
     }
   </script>    
 </body>

@@ -14,10 +14,6 @@
   <script type="text/javascript" src="spidergl/spidergl.min.js"></script>
   <script type="text/javascript" src="spidergl/multires.min.js"></script>
   <script type="text/javascript" src="main.js"></script>
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.min.css"> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.min.js"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.css">
 
 <style> 
   html { 
@@ -195,6 +191,7 @@
       // Create web RTI viewer
       // Web RTI Viewer from Visual Computing Lab in ISTI (http://vcg.isti.cnr.it/rti/webviewer.php)
       function showRTI() {
+        document.getElementById('rtiContainer_webgl');
         createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
       }
       showRTI();
@@ -221,10 +218,6 @@
     rtiContainer.style.display = 'none';
     dwgContainer.style.display = 'none';
     imageContainer.stlye.display = 'none';
-    function setWidth(w) {
-      var canvas = document.getElementById("rtiContainer_webgl");  
-      canvas.width = w;
-    }
     // Function for turning each viewer on and off when pressing the corresponding button
     function viewerAtoggle(x) {
       if (x.style.display == 'none') {
@@ -239,7 +232,6 @@
         changedWidthA = (90-3*(toggleAcount-1))/toggleAcount;
         cesiumContainer.style.width = changedWidthA+'vw';
         dwgContainer.style.width = changedWidthA+'vw';
-        setWidth(rtiContainer.style.width);
     }
     function viewerBtoggle(x) {
       if (x.style.display == 'none') {
@@ -254,7 +246,6 @@
       changedWidthB = (90-3*(toggleBcount-1))/toggleBcount;
       rtiContainer.style.width = changedWidthB+'vw';
       imageContainer.style.width = changedWidthB+'vw';
-      setWidth(rtiContainer.style.width);
     }
   </script>    
 </body>

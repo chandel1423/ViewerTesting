@@ -50,18 +50,21 @@
     float: left;
     margin-right: 3vw;
     width:90vw; height:80vh;
+    border: 1px solid;
   }
   #dwgContainer { 
     display: none;
     float: left;
     margin-right: 3vw;
     width:90vw; height:80vh;
+    border: 1px solid;
   }
   #imageContainer { 
     display: none;
     float: left;
     margin-right: 3vw;
     width:90vw; height:80vh;
+    border: 1px solid;
   }
   input {
     display: none;
@@ -200,25 +203,20 @@
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 2">button 2</button>
   </div>
-  <div>
+  <div id="imageContainer">
     <img id="targetImage" src="image.jpg" alt="target image">
+    <button type="button" class="image-button" data-toggle="tooltip" data-placement="bottom" 
+      title="sample button 1">button 1</button>
+   <button type="button" class="image-button" data-toggle="tooltip" data-placement="bottom" 
+      title="sample button 2">button 2</button>
   </div>
-    <script>
-      import Viewer from 'viewerjs';
-      const imageViewer = new Viewer(document.getElementById("targetImage"), {
-        inline: true,
-        viewed() {
-          viewer.zoomTo(1);
-        },
-      });
-    </script>
-  </div>
+
 </div>
 
   <script>
     // Script for changing the width for each viewer based on number of viewers turned on
     var toggleAcount = 0;
-    var toggleBcount = 0;
+    var toggleBcount = 1;
     cesiumContainer.style.display = 'none';
     rtiContainer.style.display = 'none';
     dwgContainer.style.display = 'none';
@@ -252,11 +250,9 @@
         x.style.display = 'none';
         toggleBcount = toggleBcount - 1;
       }
-      if (toggleBcount !== 0) {
-        changedWidthB = (90-3*(toggleBcount-1))/toggleBcount;
-        rtiContainer.style.width = changedWidthB+'vw';
-        imageContainer.style.width = changedWidthB+'vw';
-      }
+      changedWidthB = (90-3*(toggleBcount-1))/toggleBcount;
+      rtiContainer.style.width = changedWidthB+'vw';
+      imageContainer.style.width = changedWidthB+'vw';
     }
   </script>    
 </body>

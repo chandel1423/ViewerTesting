@@ -211,7 +211,6 @@
    <button type="button" class="image-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 2">button 2</button>
   </div>
-
 </div>
 
   <script>
@@ -231,17 +230,16 @@
       if (x.style.display == 'none') {
         x.style.display = 'block';
         toggleAcount = toggleAcount + 1;
+        showRTI();
       }
       else {
         x.style.display = 'none';
         toggleAcount = toggleAcount - 1;
       }
-      if (toggleAcount !== 0) {
         changedWidthA = (90-3*(toggleAcount-1))/toggleAcount;
         cesiumContainer.style.width = changedWidthA+'vw';
         dwgContainer.style.width = changedWidthA+'vw';
         setWidth(rtiContainer.style.width);
-      }
     }
     function viewerBtoggle(x) {
       if (x.style.display == 'none') {

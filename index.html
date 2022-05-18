@@ -118,7 +118,7 @@
   </div>
 
   <div>
-    (0.194)
+    (0.195)
   </div>
 
 <div id="containerA">
@@ -190,11 +190,14 @@
     <script>
       // Create web RTI viewer
       // Web RTI Viewer from Visual Computing Lab in ISTI (http://vcg.isti.cnr.it/rti/webviewer.php)
+      function showRTI() {
+        createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
+      }
+      showRTI();
       function refreshRTI() {
         document.getElementById('rtiContainer_webgl').remove();
         createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
       }
-      refreshRTI();
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>

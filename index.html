@@ -100,7 +100,8 @@
 </head>
 
 <body>
-  <div>
+  <div id="mainToggle">
+    case 1
     <input type="checkbox" id="mainToggleSwitch">
     <label for="mainToggleSwitch"></label>
     <script>
@@ -117,6 +118,7 @@
           }
       }, false);
     </script>
+    case 2
   </div>
 
   <div>
@@ -175,8 +177,7 @@
   </div>
 
   <div id="dwgContainer">
-    <script>
-    </script>
+    <iframe src="https://sharecad.org/cadframe/load?url=test.dwg" scrolling="no" width="100%" height="100%"> </iframe>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
@@ -196,6 +197,7 @@
       function showRTI() {
         createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
       }
+      showRTI();
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
@@ -238,6 +240,7 @@
         changedWidthA = (90-3*(toggleAcount-1))/toggleAcount;
         cesiumContainer.style.width = changedWidthA+'vw';
         dwgContainer.style.width = changedWidthA+'vw';
+        setWidth(rtiContainer.style.width);
       }
     }
     function viewerBtoggle(x) {
@@ -253,6 +256,7 @@
       changedWidthB = (90-3*(toggleBcount-1))/toggleBcount;
       rtiContainer.style.width = changedWidthB+'vw';
       imageContainer.style.width = changedWidthB+'vw';
+      setWidth(rtiContainer.style.width);
     }
   </script>    
 </body>

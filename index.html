@@ -14,8 +14,11 @@
   <script type="text/javascript" src="spidergl/spidergl.min.js"></script>
   <script type="text/javascript" src="spidergl/multires.min.js"></script>
   <script type="text/javascript" src="main.js"></script>
-  <link type="text/css" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" rel="stylesheet">
-  <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.css">
+
 <style> 
   html { 
     overflow-y: visible; 
@@ -24,43 +27,104 @@
   body { 
     position: absolute; 
   }
-  #togglebuttons {
-    margin-bottom: 20px;
+  #containerA {
+    display: block;
   }
-  #blankAlert {
-    display: none
+  #containerB {
+    display: none;
+  }
+  #ToggleA {
+    margin-bottom: 10px;
+  }
+  #ToggleB {
+    margin-bottom: 10px;
   }
   #cesiumContainer {
+    display: none;
     float: left;
     margin-right: 3vw;
     width:90vw; height:80vh;
   }
   #rtiContainer { 
+    display: none;
     float: left;
     margin-right: 3vw;
     width:90vw; height:80vh;
   }
   #dwgContainer { 
+    display: none;
     float: left;
     margin-right: 3vw;
     width:90vw; height:80vh;
   }
+  #imageContainer { 
+    display: none;
+    float: left;
+    margin-right: 3vw;
+    width:90vw; height:80vh;
+  }
+  input {
+    display: none;
+  }
+  label {
+    display: inline-block;
+    width: 100px;
+    height: 34px;
+    cursor: pointer;
+    position: relative;
+    background-color: grey;
+  }
+  label::before {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 26px;
+    left: 4px;
+    bottom: 4px;
+    position: absolute;
+    background-color: white;
+    transition: all .4s ease;
+  }
+  input:checked + label {background-color: lightskyblue}
+  input:checked + label:before {
+    -webkit-transform: translateX(65px);
+    -ms-transform: translateX(65px);
+    transform: translateX(65px);
+  }
+  label.round {border-radius: 34px}
+  label.round::before {border-radius: 50%}
 </style>
 </head>
 
 <body>
-  <div id="togglebuttons">
-    <!--Buttons to toggle viewers on and off-->
-    <button onclick="viewertoggle(cesiumContainer)" style="background-color:lightgreen">Cesium Ion</button>
-    <button onclick="viewertoggle(rtiContainer)" style="background-color:coral">RTI Viewer</button>
-    <button onclick="viewertoggle(dwgContainer)" style="background-color:lightblue">DWG File Viewer</button>
+  <div>
+    <input type="checkbox" id="mainToggleSwitch">
+    <label for="mainToggleSwitch"></label>
+    <script>
+      var mainToggle = false;
+      mainToggleSwitch.addEventListener('click', function(){
+          mainToggle = !mainToggle;
+          if (mainToggle == true) {
+            containerA.style.display='none';
+            containerB.style.display='block';
+          }
+          else {
+            containerA.style.display='block';
+            containerB.style.display='none';
+          }
+      }, false);
+    </script>
   </div>
 
-  <div id="blankAlert">
-    <!--Something to show when there is no viewer turned on-->
-    Please choose a viewer to start from. (0.16)
+  <div>
+    (0.16)
   </div>
 
+<div id="containerA">
+  <div id="ToggleA">
+    <button onclick="viewerAtoggle(cesiumContainer)" style="background-color:lightgreen">Cesium Ion</button>
+    <button onclick="viewerAtoggle(dwgContainer)" style="background-color:lightblue">DWG File Viewer</button>
+  </div>
   <div id="cesiumContainer">
     <script>
     // Access token for Cesium Ion (currently this is using SeYoon Park's access token)
@@ -107,6 +171,21 @@
     </script>
   </div>
 
+  <div id="dwgContainer">
+    <script>
+    </script>
+    <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
+      title="sample button 1">button 1</button>
+    <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
+      title="sample button 2">button 2</button>
+  </div>
+</div>
+
+<div id="containerB">
+  <div id="ToggleB">
+    <button onclick="viewerBtoggle(rtiContainer)" style="background-color:lightgreen">RTI Viewer</button>
+    <button onclick="viewerBtoggle(imageContainer)" style="background-color:lightblue">Image File Viewer</button>
+  </div>
   <div id="rtiContainer">
     <script>
       // Create web RTI viewer
@@ -121,77 +200,63 @@
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 2">button 2</button>
   </div>
-
-  <div id="dwgContainer">
+  <div>
+    <img id="targetImage" src="image.jpg" alt="target image">
+  </div>
+  <div id="imageContainer">
     <script>
-      // Create .dwg file viewer
-      // Autodesk Forge Viewer (https://forge.autodesk.com/en/docs/viewer/v7/developers_guide/overview/)
-      var dwgViewer;
-        var options = {
-            env: 'AutodeskProduction',
-            api: 'streamingV2',
-            getAccessToken: function(onTokenReady) {
-              var token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlU3c0dGRldUTzlBekNhSzBqZURRM2dQZXBURVdWN2VhIn0.eyJzY29wZSI6WyJkYXRhOnJlYWQiXSwiY2xpZW50X2lkIjoiVEYyempaZVlTVUc4TElOMHBad0tRTzFUSGJOcTdaZUMiLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbS9hdWQvYWp3dGV4cDYwIiwianRpIjoiZE5OYWI1NmlYMGNGam9GZHBPSmpsWXJPVVhGZGx3aDJWTE9hbVdJcGUxQUtRSXdQSm9naHNPU3A4bFpiUkQ0OSIsImV4cCI6MTY1MTY1NDIyM30.e0HND5TN1Rk8CZZYaew2SRDxbyqsSrvpURwfjKDTnoSC81KZbhZbSbgr2QaKOkMvtFMtvJUFa3ZsJdSP8fTKTVI21HbB7cv1rcRRxE1GunSQA9KkP4kprxc7Zs6lP053EtPETuWtYPb7AZootqiCWcfR2j5pnjsv48EPb0UTE_zWKdNCJdCOanI__zndjpgfcCT2kVrq1AAU5sFgW32nYxdjBq_1iT03AZKYsQlZYnVcAjwIGKHRjuwxCmK1ITuaFB5q0sJ_CyKp1LJtajIHl7vZ0u0-rxtLta-TKVI8rQXRnXLbwBhMYwZWPc88s-_oz50sLRdvKhJJdTZ6kL0pCA';
-              var timeInSeconds = 3600;
-              onTokenReady(token, timeInSeconds);
-            }
-        };
-      // Initializing Autodesk Forge Viewer
-      Autodesk.Viewing.Initializer(options, function() {
-        var htmlDiv = document.getElementById('dwgContainer');
-        dwgViewer = new Autodesk.Viewing.GuiViewer3D(htmlDiv);
-        var startedCode = dwgViewer.start();
-        if (startedCode > 0) {
-          console.error('falied to create a viewer: WebGL not supported');
-          return;
-        }
-
-        console.log('Initialization complete, loading a model next...');
-      document.getElementById('adsk-viewing-viewer notouch dark-theme quality-text').style.width = document.getElementById('dwgContainer').style.width;  
-      document.getElementById('adsk-viewing-viewer notouch dark-theme quality-text').style.height = document.getElementById('dwgContainer').style.height;  
+      import Viewer from 'viewerjs';
+      const imageViewer = new Viewer(document.getElementById("targetImage"), {
+        inline: true,
+        viewed() {
+          viewer.zoomTo(1);
+        },
       });
     </script>
-    <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
-      title="sample button 1">button 1</button>
-    <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
-      title="sample button 2">button 2</button>
   </div>
+</div>
 
   <script>
     // Script for changing the width for each viewer based on number of viewers turned on
-    var togglecount = 1;
-    cesiumContainer.style.display = 'block';
+    var toggleAcount = 0;
+    var toggleBcount = 0;
+    cesiumContainer.style.display = 'none';
     rtiContainer.style.display = 'none';
     dwgContainer.style.display = 'none';
+    imageContainer.stlye.display = 'none';
     function setWidth(w) {
       var canvas = document.getElementById("rtiContainer_webgl");  
       canvas.width = w;
     }
-    function changewidth() {
-      changedWidth = (90-3*(togglecount-1))/togglecount;
-      cesiumContainer.style.width = changedWidth+'vw';
-      rtiContainer.style.width = changedWidth+'vw';
-      setWidth(rtiContainer.style.width);
-      dwgContainer.style.width = changedWidth+'vw';
-    }
     // Function for turning each viewer on and off when pressing the corresponding button
-    function viewertoggle(x) {
+    function viewerAtoggle(x) {
       if (x.style.display == 'none') {
         x.style.display = 'block';
-        togglecount = togglecount + 1;
+        toggleAcount = toggleAcount + 1;
       }
       else {
         x.style.display = 'none';
-        togglecount = togglecount - 1;
+        toggleAcount = toggleAcount - 1;
       }
-      if (togglecount == 0) {
-        // Displays the alert message when there is no viewer turned on
-        blankAlert.style.display = 'block';
+      if (toggleAcount !== 0) {
+        changedWidthA = (90-3*(toggleAcount-1))/toggleAcount;
+        cesiumContainer.style.width = changedWidthA+'vw';
+        dwgContainer.style.width = changedWidthA+'vw';
+      }
+    }
+    function viewerBtoggle(x) {
+      if (x.style.display == 'none') {
+        x.style.display = 'block';
+        toggleBcount = toggleBcount + 1;
       }
       else {
-        // Hides the alert message and changes the width of each viewer
-        blankAlert.style.display = 'none';
-        changewidth();
+        x.style.display = 'none';
+        toggleBcount = toggleBcount - 1;
+      }
+      if (toggleBcount !== 0) {
+        changedWidthB = (90-3*(toggleBcount-1))/toggleBcount;
+        rtiContainer.style.width = changedWidthB+'vw';
+        imageContainer.style.width = changedWidthB+'vw';
       }
     }
   </script>    

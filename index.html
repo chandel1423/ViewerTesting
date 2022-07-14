@@ -62,6 +62,7 @@
     width:90vw; height:80vh;
     border: 1px solid;
   }
+/* CSS style setting for the main toggle button */
   input {
     display: none;
   }
@@ -97,6 +98,7 @@
 
 <body>
   <div id="mainToggle">
+    <!-- main toggle button to switch between Cesium/dwg and RTI/image --> 
     case 1
     <input type="checkbox" id="mainToggleSwitch">
     <label for="mainToggleSwitch"></label>
@@ -123,12 +125,13 @@
 
 <div id="containerA">
   <div id="ToggleA">
+    <!-- buttons to open Cesium and ShareCAD viewers -->
     <button onclick="viewerAtoggle(cesiumContainer)" style="background-color:lightgreen">Cesium Ion</button>
     <button onclick="viewerAtoggle(dwgContainer)" style="background-color:lightblue">DWG File Viewer</button>
   </div>
   <div id="cesiumContainer">
     <script>
-    // Access token for Cesium Ion (currently this is using SeYoon Park's access token)
+    // Access token for Cesium Ion (currently this is using SeYoon Park's access token, need to switch to another account's)
     Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNjQ1NTgwOS1hM2QzLTQ1Y2QtOWE5Zi1jODc1ZTJjNDkxODEiLCJpZCI6NzkyNDQsImlhdCI6MTY0MTkzMTc3NH0.AmCqPPV7p3Oldv_Vk-WrBPm_NwkhpTxgZWZaqWnI-pE';
     // Create Cesium viewer with only the model
     // Cesium JS (https://cesium.com/platform/cesiumjs/)
@@ -151,6 +154,7 @@
     });
     </script>
     <div>
+      <!-- buttons for control outside of Cesium viewer -->
       <button type="button" class="cesium-button" onclick = "topView();" data-toggle="tooltip" data-placement="bottom" 
         title="Click to view the model from the top">Top View</button>
       <button type="button" class="cesium-button" onclick = "bottomView();" data-toggle="tooltip" data-placement="bottom" 
@@ -159,7 +163,7 @@
         title="Click to view the model from the front side">Front View</button>
     </div>
     <script>
-      // Make functions that changes the view point in Cesium viewer
+      // Make functions that changes the view point in Cesium viewer, utilized by the buttons above
       function topView() {
           cesiumViewer.camera.viewBoundingSphere(tileset.boundingSphere, new Cesium.HeadingPitchRange(0, -Cesium.Math.PI_OVER_TWO, 0));
       }
@@ -173,7 +177,8 @@
   </div>
 
   <div id="dwgContainer">
-    <iframe src="https://sharecad.org/cadframe/load?url=https://www.cadsofttools.com/dwgviewer/hostel_block.dwg" scrolling="no" width="100%" height="100%"> </iframe>
+    <!-- .dwg file viewer: ShareCAD (https://sharecad.org/home/OnlinePlugin) -->
+    <iframe src="test.dwg" scrolling="no" width="100%" height="100%"> </iframe>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
@@ -183,6 +188,7 @@
 
 <div id="containerB">
   <div id="ToggleB">
+    <!-- buttons to open Web RTI Viewer and the image -->
     <button onclick="viewerBtoggle(rtiContainer)" style="background-color:lightgreen">RTI Viewer</button>
     <button onclick="viewerBtoggle(imageContainer)" style="background-color:lightblue">Image File Viewer</button>
   </div>
@@ -190,7 +196,11 @@
     <script>
       // Create web RTI viewer
       // Web RTI Viewer from Visual Computing Lab in ISTI (http://vcg.isti.cnr.it/rti/webviewer.php)
+      // Currently it is not really working well, need to further fix
+      // Once RTI viewer is created, it is in a canvas whose size cannot be further adjusted
+      // Tried to remove the canvas whenever the size of the division changes, and then create a new canvas with the size of the newly adjusted division 
       createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
+      // function that removes the canvas created by createRTIViewer function and re-creates one
       function refreshRTI() {
         var canvas = document.getElementById('rtiContainer_webgl');
         var context = canvas.getContext('2d');
@@ -211,10 +221,11 @@
 
   <script>
     // Script for changing the width for each viewer based on number of viewers turned on
+    // 
     var toggleAcount = 0;
     var toggleBcount = 1;
     cesiumContainer.style.display = 'none';
-    rtiContainer.style.display = 'none';
+    rtiContainer.style.display = 'block';
     dwgContainer.style.display = 'none';
     imageContainer.stlye.display = 'none';
     // Function for turning each viewer on and off when pressing the corresponding button

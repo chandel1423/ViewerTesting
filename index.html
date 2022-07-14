@@ -118,7 +118,7 @@
   </div>
 
   <div>
-    (0.2)
+    (0.221)
   </div>
 
 <div id="containerA">
@@ -206,14 +206,14 @@
   </div>
 
   <div id="imageContainer">
-    <img id="targetImage" src="image.jpg" alt="target image" style="height:90%">
+    <img id="targetImage" src="image.jpg" alt="target image" style="height:100%">
   </div>
 </div>
 
   <script>
     // Script for changing the width for each viewer based on number of viewers turned on
     var toggleAcount = 0;
-    var toggleBcount = 0;
+    var toggleBcount = 1;
     cesiumContainer.style.display = 'none';
     rtiContainer.style.display = 'none';
     dwgContainer.style.display = 'none';
@@ -244,7 +244,7 @@
       changedWidthB = (90-3*(toggleBcount-1))/toggleBcount;
       rtiContainer.style.width = changedWidthB+'vw';
       imageContainer.style.width = changedWidthB+'vw';
-      refreshRTI();      
+      refreshRTI();
     }
   </script>    
 </body>

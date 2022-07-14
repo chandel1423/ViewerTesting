@@ -204,8 +204,9 @@
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 2">button 2</button>
   </div>
+
   <div id="imageContainer">
-    <img id="targetImage" src="image.jpg" alt="target image" width='auto' object-fit="contain">
+    <img id="targetImage" src="image.jpg" alt="target image" style="height:100%">
     <button type="button" class="image-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
    <button type="button" class="image-button" data-toggle="tooltip" data-placement="bottom" 
@@ -216,7 +217,7 @@
   <script>
     // Script for changing the width for each viewer based on number of viewers turned on
     var toggleAcount = 0;
-    var toggleBcount = 1;
+    var toggleBcount = 0;
     cesiumContainer.style.display = 'none';
     rtiContainer.style.display = 'none';
     dwgContainer.style.display = 'none';

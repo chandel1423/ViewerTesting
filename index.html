@@ -178,6 +178,7 @@
 
   <div id="dwgContainer">
     <!-- .dwg file viewer: ShareCAD (https://sharecad.org/home/OnlinePlugin) -->
+    <!-- if there is better way to display CAD files in html without embedding the iframe plugin, please change to that-->
     <iframe src="//sharecad.org/cadframe/load?url=test.dwg" scrolling="no" width="100%" height="100%"> </iframe>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
@@ -223,9 +224,9 @@
     // Script for changing the width for each viewer based on number of viewers turned on
     // 
     var toggleAcount = 0;
-    var toggleBcount = 0;
+    var toggleBcount = 1;
     cesiumContainer.style.display = 'none';
-    rtiContainer.style.display = 'block';
+    rtiContainer.style.display = 'none';
     dwgContainer.style.display = 'none';
     imageContainer.stlye.display = 'none';
     // Function for turning each viewer on and off when pressing the corresponding button

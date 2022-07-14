@@ -118,7 +118,7 @@
   </div>
 
   <div>
-    (0.224)
+    (0.226)
   </div>
 
 <div id="containerA">
@@ -190,8 +190,17 @@
     <script>
       // Create web RTI viewer
       // Web RTI Viewer from Visual Computing Lab in ISTI (http://vcg.isti.cnr.it/rti/webviewer.php)
-      createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
-          </script>
+      function showRTI() {
+        createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
+      }
+      showRTI();
+      function refreshRTI() {
+        var canvas = document.getElementById('rtiContainer_webgl');
+        var context = canvas.getContext('2d');
+        context.clearRect(0,0,canvas.width, canvas.height);
+        createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
+      }
+        </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
@@ -199,7 +208,7 @@
   </div>
 
   <div id="imageContainer">
-    <img id="targetImage" src="image.jpg" alt="target image" style="height:100%; vertical-align:middle">
+    <img id="targetImage" src="image.jpg" alt="target image" style="height:100%; margin-left: auto; margin-right: auto; display: block;">
   </div>
 </div>
 
@@ -237,6 +246,7 @@
       changedWidthB = (90-3*(toggleBcount-1))/toggleBcount;
       rtiContainer.style.width = changedWidthB+'vw';
       imageContainer.style.width = changedWidthB+'vw';
+      refreshRTI();      
     }
   </script>    
 </body>

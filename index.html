@@ -118,7 +118,7 @@
   </div>
 
   <div>
-    (0.221)
+    (0.222)
   </div>
 
 <div id="containerA">
@@ -194,10 +194,6 @@
         createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
       }
       showRTI();
-      function refreshRTI() {
-        document.getElementById('rtiContainer_webgl').remove();
-        createRtiViewer('rtiContainer', "webrti", document.getElementById('rtiContainer').clientWidth, document.getElementById('rtiContainer').clientHeight); 
-      }
     </script>
     <button type="button" class="rti-button" data-toggle="tooltip" data-placement="bottom" 
       title="sample button 1">button 1</button>
@@ -244,7 +240,6 @@
       changedWidthB = (90-3*(toggleBcount-1))/toggleBcount;
       rtiContainer.style.width = changedWidthB+'vw';
       imageContainer.style.width = changedWidthB+'vw';
-      refreshRTI();
     }
   </script>    
 </body>
